@@ -26,7 +26,7 @@ const POINTS = [
 ];
 
 const Safety = () => {
-  const { ref, seen } = useInView<HTMLElement>(0.2);
+  const { ref, seen } = useInView<HTMLElement>();
 
   return (
     <section

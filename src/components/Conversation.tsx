@@ -45,8 +45,12 @@ const STEPS = [
 const Conversation = () => {
   const [stage, setStage] = useState<Stage>("options");
   const [reduceMotion, setReduceMotion] = useState(false);
-  // only run the loop while it's on screen, so nobody lands on it halfway
-  const { ref: sectionRef, inView, seen } = useInView<HTMLElement>();
+  const { ref: sectionRef, seen } = useInView<HTMLElement>();
+  // the loop runs only while the card itself is mostly on screen
+  const { ref: cardRef, inView } = useInView<HTMLDivElement>({
+    threshold: 0.5,
+    rootMargin: "0px",
+  });
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -104,6 +108,7 @@ const Conversation = () => {
 
       {/* the round card */}
       <div
+        ref={cardRef}
         aria-hidden
         className="relative flex h-[440px] w-[min(300px,calc(100vw-4rem))] shrink-0 flex-col rounded-3xl bg-white p-5 shadow-xl ring-1 ring-gray-100"
       >

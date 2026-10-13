@@ -22,7 +22,7 @@ const PHOTOS = [
 ];
 
 const Moments = () => {
-  const { ref, seen } = useInView<HTMLElement>(0.2);
+  const { ref, seen } = useInView<HTMLElement>();
 
   return (
     <section ref={ref} className="mx-auto w-full max-w-4xl pb-28">

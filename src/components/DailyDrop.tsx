@@ -52,8 +52,12 @@ const DailyDrop = () => {
   const [stage, setStage] = useState<Stage>("countdown");
   const [seconds, setSeconds] = useState(3);
   const [reduceMotion, setReduceMotion] = useState(false);
-  // only run the loop while it's on screen, so nobody lands on it halfway
-  const { ref: sectionRef, inView, seen } = useInView<HTMLElement>();
+  const { ref: sectionRef, seen } = useInView<HTMLElement>();
+  // the loop runs only while the card itself is mostly on screen
+  const { ref: cardRef, inView } = useInView<HTMLDivElement>({
+    threshold: 0.5,
+    rootMargin: "0px",
+  });
 
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
@@ -112,7 +116,7 @@ const DailyDrop = () => {
         </ol>
       </div>
 
-      <div className="relative perspective-[1200px]" aria-hidden>
+      <div ref={cardRef} className="relative perspective-[1200px]" aria-hidden>
         {/* soft glow behind the card when it's a match */}
         <div
           className={`absolute inset-6 rounded-full blur-3xl transition-all duration-700 ${
