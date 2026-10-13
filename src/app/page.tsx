@@ -1,4 +1,4 @@
-import { Features, Tagline } from "@/components";
+import { Features, Tagline, DailyDrop } from "@/components";
 import Image from "next/image";
 
 export default function Home() {
@@ -18,7 +18,9 @@ export default function Home() {
             </button>
         </div>
 
-        
+        <DailyDrop />
+
+        <div>Coming to Manchester in December 2026</div>
     </div>
   );
 }

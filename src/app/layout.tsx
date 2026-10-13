@@ -21,7 +21,7 @@ const chango = Chango({
 });
 
 export const metadata: Metadata = {
-  title: "Pool | The new way to date",
+  title: "Jinx | The new way to date",
   description: "A dating app that helps you find meaningful connections, not just swipes.",
 };
 
