@@ -12,6 +12,7 @@
   --font-inter: var(--font-inter);
   --font-bungee: var(--font-bungee);
   --font-chango: var(--font-chango);
+  --font-nunito: var(--font-nunito);
 }
 
 body {
@@ -43,5 +44,116 @@ body {
   to {
     transform: translate(var(--dx), var(--dy)) scale(0.2);
     opacity: 0;
+  }
+}
+
+/* fake tap on the Connect button: press in, then release */
+@keyframes tap-press {
+  0% {
+    transform: scale(1);
+  }
+  35% {
+    transform: scale(0.94);
+  }
+  100% {
+    transform: scale(1);
+  }
+}
+
+/* finger-sized touch indicator */
+@keyframes tap-touch {
+  0% {
+    transform: scale(0.4);
+    opacity: 0;
+  }
+  30% {
+    transform: scale(1);
+    opacity: 1;
+  }
+  100% {
+    transform: scale(1.1);
+    opacity: 0;
+  }
+}
+
+/* soft halo that spreads out from the button after the tap */
+@keyframes tap-halo {
+  from {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  to {
+    transform: scale(1.18, 1.5);
+    opacity: 0;
+  }
+}
+
+@keyframes fade-up {
+  from {
+    transform: translateY(12px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes dot-wave {
+  0%,
+  60%,
+  100% {
+    transform: translateY(0);
+    opacity: 0.35;
+  }
+  30% {
+    transform: translateY(-3px);
+    opacity: 1;
+  }
+}
+
+/*
+  smooth FAQ open. Browsers without ::details-content ignore these rules and
+  open instantly, which is fine.
+*/
+.faq-item {
+  interpolate-size: allow-keywords;
+}
+
+.faq-item::details-content {
+  block-size: 0;
+  overflow: hidden;
+  transition:
+    block-size 0.3s ease,
+    content-visibility 0.3s allow-discrete;
+}
+
+.faq-item[open]::details-content {
+  block-size: auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .faq-item::details-content {
+    transition: none;
+  }
+}
+
+/* section headings stay grey until the scroll line reaches them (FlowLine) */
+[data-flow-node] {
+  transition: color 0.5s ease;
+}
+
+[data-flow-node]:not([data-lit]) {
+  color: var(--color-gray-300);
+}
+
+/* header links glide to their section, landing clear of the sticky header */
+html {
+  scroll-padding-top: 96px;
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  html {
+    scroll-behavior: smooth;
   }
 }

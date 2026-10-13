@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter, Titan_One, Bungee, Chango } from "next/font/google";
+import { Inter, Titan_One, Bungee, Chango, Nunito } from "next/font/google";
 import { Header } from "@/components";
 import "./globals.css";
 
@@ -14,6 +14,12 @@ const bungee = Bungee({
   weight: "400"
 });
 
+// rounded, to sit with the logo
+const nunito = Nunito({
+  variable: "--font-nunito",
+  subsets: ["latin"],
+});
+
 const chango = Chango({
   variable: "--font-chango",
   subsets: ["latin"],
@@ -23,16 +29,27 @@ const chango = Chango({
 export const metadata: Metadata = {
   title: "Jinx | The new way to date",
   description: "A dating app that helps you find meaningful connections, not just swipes.",
+  openGraph: {
+    title: "Jinx | The new way to date",
+    description: "One match a day. Get to know each other one question at a time.",
+    siteName: "Jinx",
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Jinx | The new way to date",
+    description: "One match a day. Get to know each other one question at a time.",
+  },
 };
 
 export default function RootLayout({ children }: LayoutProps<"/">) {
   return (
     <html
       lang="en"
-      className={`${inter.variable} ${bungee.variable} ${chango.variable} h-full antialiased`}
+      className={`${inter.variable} ${bungee.variable} ${chango.variable} ${nunito.variable} h-full antialiased`}
     >
       <body className=" flex flex-col">
-        <div className="w-full max-w-[1080px] h-full mx-auto flex flex-col">
+        <div className="w-full max-w-[1080px] min-h-full mx-auto flex flex-col">
           <Header />
           {children}
         </div>
