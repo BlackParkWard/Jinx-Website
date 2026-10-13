@@ -110,7 +110,7 @@ const Conversation = () => {
       <div
         ref={cardRef}
         aria-hidden
-        className="relative flex h-[440px] w-[min(300px,calc(100vw-4rem))] shrink-0 flex-col rounded-3xl bg-white p-5 shadow-xl ring-1 ring-gray-100"
+        className="mx-auto relative flex h-[440px] w-[min(300px,calc(100vw-4rem))] shrink-0 flex-col rounded-3xl bg-white p-5 shadow-xl ring-1 ring-gray-100"
       >
         <div className="flex items-center justify-between">
           <p className="text-xs uppercase tracking-wider text-gray-500">
@@ -121,7 +121,7 @@ const Conversation = () => {
             alt=""
             width={240}
             height={328}
-            className="h-5 w-auto"
+            className="h-5 w-auto brightness-0"
           />
         </div>
 

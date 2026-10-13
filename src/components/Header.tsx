@@ -40,13 +40,13 @@ const Header = () => {
                     {/* the source PNG is a padded square, so crop to the wordmark */}
                     <span className="relative block h-9 aspect-[1510/758] overflow-hidden">
                         <Image
-                            src="/jinx-on-white.png"
+                            src="/jinx_logo.svg"
                             alt="Jinx"
                             width={2000}
                             height={2000}
                             sizes="100px"
                             preload
-                            className="absolute max-w-none"
+                            className="absolute max-w-none fill-blue-500"
                             style={{ width: "132.45%", height: "auto", left: "-13.58%", top: "-83.25%" }}
                         />
                     </span>

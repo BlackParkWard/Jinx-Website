@@ -14,8 +14,19 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex font-sans bg-white h-full px-6 flex flex-col">
-        <Tagline />
-        <div className="flex  gap-2 justify-center h-max items-center pb-25 animate-[fade-up_0.7s_ease-out_320ms_both] motion-reduce:animate-none">
+        <section className="relative isolate -mx-6 mb-20 overflow-hidden pb-20">
+          {/* the flash photo is small, so a dark wash hides the softness */}
+          <Image
+            src="/flash_photo2.jpg"
+            alt=""
+            fill
+            preload
+            sizes="100vw"
+            className="-z-10 object-cover object-[50%_40%]"
+          />
+          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
+          <Tagline />
+          <div className="flex  gap-2 justify-center h-max items-center animate-[fade-up_0.7s_ease-out_320ms_both] motion-reduce:animate-none">
             <button 
               style={{ backgroundColor: process.env.NEXT_PUBLIC_BRAND_COLOR }}
               className="text-white px-5 pl-4 py-2 rounded-full text-lg hover:brightness-95 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-[0.98] transition duration-200 flex gap-2 items-center justify-center"
@@ -26,7 +37,8 @@ export default function Home() {
             <button className=" px-5 py-2 rounded-full  text-lg bg-gray-200 text-gray-800 hover:bg-gray-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition duration-200">
               Create account
             </button>
-        </div>
+          </div>
+        </section>
 
         <FlowLine>
           <DailyDrop />

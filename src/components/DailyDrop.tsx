@@ -138,7 +138,7 @@ const DailyDrop = () => {
               alt=""
               width={240}
               height={328}
-              className="mb-2 h-16 w-auto animate-pulse motion-reduce:animate-none"
+              className="mb-2 h-16 w-auto brightness-0 animate-pulse motion-reduce:animate-none"
             />
             <p className="text-sm uppercase tracking-widest text-gray-500">
               Today&apos;s match in
