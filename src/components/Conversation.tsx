@@ -81,7 +81,7 @@ const Conversation = () => {
     >
       <div className="max-w-sm">
         <h2 data-flow-node className="mb-8 text-3xl font-bold">
-          Then, one question at a time.
+          One question at a time.
         </h2>
         <ol className="flex flex-col gap-6">
           {STEPS.map((step, i) => (

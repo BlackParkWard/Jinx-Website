@@ -35,7 +35,7 @@ const Header = () => {
                     : "bg-white"
             }`}
         >
-            <h1>
+            <div>
                 <a href="#top" aria-label="Jinx, back to top" className="block">
                     {/* the source PNG is a padded square, so crop to the wordmark */}
                     <span className="relative block h-9 aspect-[1510/758] overflow-hidden">
@@ -51,7 +51,7 @@ const Header = () => {
                         />
                     </span>
                 </a>
-            </h1>
+            </div>
 
             <nav className="flex items-center">
                 <ul className="hidden gap-8 text-sm text-gray-600 md:flex">

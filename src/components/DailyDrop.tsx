@@ -97,7 +97,7 @@ const DailyDrop = () => {
     >
       <div className="max-w-sm">
         <h2 data-flow-node className="mb-8 text-3xl font-bold">
-          One match. Every day.
+          The new way to date.
         </h2>
         <ol className="flex flex-col gap-6">
           {STEPS.map((step) => {

@@ -157,3 +157,19 @@ html {
     scroll-behavior: smooth;
   }
 }
+
+/* the hero strikes through "swiping" once, then greys it out */
+@keyframes tagline-strike {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}
+
+@keyframes tagline-dim {
+  from {
+    color: var(--color-gray-900);
+  }
+}
