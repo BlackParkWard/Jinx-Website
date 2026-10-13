@@ -58,6 +58,10 @@ const FlowLine = ({ children }: { children: ReactNode }) => {
     const els = root.querySelectorAll<HTMLElement>("[data-flow-node]");
     const start = nodes[0];
     const end = nodes[nodes.length - 1];
+    // where scroll-driven animations exist the browser draws the line itself
+    // (globals.css), in step with the scroll. Drawing it from scroll events
+    // lags a frame behind on iOS and looks jittery, so that's only a fallback.
+    const cssDriven = CSS.supports("animation-timeline: view()");
 
     let frame = 0;
     const update = () => {
@@ -65,7 +69,7 @@ const FlowLine = ({ children }: { children: ReactNode }) => {
       const tip =
         window.innerHeight * ANCHOR - root.getBoundingClientRect().top;
       const progress = Math.min(1, Math.max(0, (tip - start) / (end - start)));
-      fill.style.transform = `scaleY(${progress})`;
+      if (!cssDriven) fill.style.transform = `scaleY(${progress})`;
       const count = nodes.filter((y) => tip >= y).length;
       els.forEach((el, i) => {
         el.toggleAttribute("data-lit", i < count);
@@ -96,7 +100,7 @@ const FlowLine = ({ children }: { children: ReactNode }) => {
         <div
           aria-hidden
           // in the page padding on phones, in the margin beside the content on desktop
-          className="pointer-events-none absolute w-0.5 -translate-x-1/2"
+          className="flow-track pointer-events-none absolute w-0.5 -translate-x-1/2"
           style={{
             left: "max(-8px, calc(50% - 486px))",
             top: start,
@@ -106,8 +110,8 @@ const FlowLine = ({ children }: { children: ReactNode }) => {
           <div className="absolute inset-0 rounded-full bg-gray-200" />
           <div
             ref={fillRef}
-            className="absolute inset-0 origin-top rounded-full will-change-transform"
-            style={{ backgroundColor: BRAND, transform: "scaleY(0)" }}
+            className="flow-fill absolute inset-0 origin-top rounded-full will-change-transform"
+            style={{ backgroundColor: BRAND }}
           />
           {nodes.map((y, i) => {
             const lit = i < reached;

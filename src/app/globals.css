@@ -173,3 +173,35 @@ html {
     color: var(--color-gray-900);
   }
 }
+
+/*
+  FlowLine: the fill grows as the line passes a mark 60% down the screen
+  (ANCHOR in FlowLine.tsx). The track's view timeline is inset to a zero-height
+  band at that mark, so the timeline runs from the track's top crossing it to
+  its bottom crossing it. Browsers without scroll-driven animations get the
+  transform from JavaScript instead.
+*/
+.flow-fill {
+  transform: scaleY(0);
+}
+
+@supports (animation-timeline: view()) {
+  .flow-track {
+    view-timeline: --flow block;
+    view-timeline-inset: 60% 40%;
+  }
+
+  .flow-fill {
+    animation: flow-fill linear both;
+    animation-timeline: --flow;
+  }
+}
+
+@keyframes flow-fill {
+  from {
+    transform: scaleY(0);
+  }
+  to {
+    transform: scaleY(1);
+  }
+}
