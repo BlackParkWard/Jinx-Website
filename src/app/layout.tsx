@@ -31,7 +31,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       lang="en"
       className={`${inter.variable} ${bungee.variable} ${chango.variable} h-full antialiased`}
     >
-      <body className="h-full flex flex-col">
+      <body className=" flex flex-col">
         <div className="w-full max-w-[1080px] h-full mx-auto flex flex-col">
           <Header />
           {children}

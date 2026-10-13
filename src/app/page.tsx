@@ -5,7 +5,7 @@ export default function Home() {
   return (
     <div className="flex font-sans bg-white h-full px-6 flex flex-col">
         <Tagline />
-        <div className="flex gap-2 justify-center items-center pb-20">
+        <div className="flex gap-2 justify-center h-max items-center pb-20">
             <button 
               style={{ backgroundColor: process.env.NEXT_PUBLIC_BRAND_COLOR }}
               className="text-white px-5 pl-4 py-2 rounded-full text-lg hover:brightness-90 transition-colors flex gap-2 items-center justify-center"
