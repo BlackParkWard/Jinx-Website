@@ -1,7 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 
-const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "#0e989d";
+const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "rgb(19, 19, 19)";
 
 const Footer = () => {
     return (

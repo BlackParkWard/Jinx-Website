@@ -2,7 +2,7 @@
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
 
-const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "#0e989d";
+const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "rgb(19, 19, 19)";
 
 // where on screen the tip of the line sits, as a fraction of viewport height
 const ANCHOR = 0.6;
@@ -126,7 +126,7 @@ const FlowLine = ({ children }: { children: ReactNode }) => {
                   top: y - start,
                   borderColor: lit ? BRAND : "#e5e7eb",
                   backgroundColor: lit ? BRAND : "#ffffff",
-                  boxShadow: current ? `0 0 0 5px ${BRAND}26` : "none",
+                  boxShadow: current ? `0 0 0 5px color-mix(in srgb, ${BRAND} 15%, transparent)` : "none",
                 }}
               />
             );

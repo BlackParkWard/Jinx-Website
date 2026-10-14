@@ -4,7 +4,7 @@ import Image from "next/image";
 import { useEffect, useState } from "react";
 import useInView from "./useInView";
 
-const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "#0e989d";
+const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "rgb(19, 19, 19)";
 
 type Stage = "options" | "chosen" | "answering" | "reveal";
 
