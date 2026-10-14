@@ -1,4 +1,5 @@
 import Image from "next/image";
+import Link from "next/link";
 
 const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "#0e989d";
 
@@ -20,11 +21,11 @@ const Footer = () => {
                 />
             </span>
 
-            {/* TODO: link these once the pages and a contact address exist */}
-            <nav className="flex gap-6">
-                <span>Privacy</span>
-                <span>Terms</span>
-                <span>Contact</span>
+            <nav className="flex flex-wrap justify-center gap-x-6 gap-y-2">
+                <Link href="/privacy" className="transition-colors hover:text-gray-900">Privacy</Link>
+                <Link href="/terms" className="transition-colors hover:text-gray-900">Terms</Link>
+                <Link href="/community-guidelines" className="transition-colors hover:text-gray-900">Guidelines</Link>
+                <Link href="/contact" className="transition-colors hover:text-gray-900">Contact</Link>
             </nav>
 
             <p>© 2026 Jinx</p>

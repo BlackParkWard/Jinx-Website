@@ -1,6 +1,7 @@
 import type { Metadata } from "next";
 import { Inter, Titan_One, Bungee, Chango, Nunito } from "next/font/google";
 import { Header } from "@/components";
+import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
 const inter = Inter({
@@ -27,6 +28,7 @@ const chango = Chango({
 });
 
 export const metadata: Metadata = {
+  metadataBase: new URL(SITE_URL),
   title: "Jinx | The new way to date",
   description: "A dating app that helps you find meaningful connections, not just swipes.",
   openGraph: {

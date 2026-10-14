@@ -6,9 +6,9 @@ import { useEffect, useState } from "react";
 const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "#0e989d";
 
 const LINKS = [
-    { href: "#how-it-works", label: "How it works" },
-    { href: "#safety", label: "Safety" },
-    { href: "#questions", label: "Questions" },
+    { href: "/#how-it-works", label: "How it works" },
+    { href: "/#safety", label: "Safety" },
+    { href: "/#questions", label: "Questions" },
 ];
 
 const Header = () => {
@@ -36,7 +36,7 @@ const Header = () => {
             }`}
         >
             <div>
-                <a href="#top" aria-label="Jinx, back to top" className="block">
+                <a href="/" aria-label="Jinx home" className="block">
                     {/* the source PNG is a padded square, so crop to the wordmark */}
                     <span className="relative block h-9 aspect-[1510/758] overflow-hidden">
                         <Image
