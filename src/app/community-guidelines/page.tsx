@@ -22,9 +22,14 @@ export default function CommunityGuidelines() {
         >
             <h2>Be yourself</h2>
             <ul>
+                <li>You must be 18 or over, and you can't use Jinx if we've banned you before.</li>
                 <li>Use your real first name and your real age.</li>
-                <li>Only use photos of you, taken recently enough that you'd be recognised.</li>
+                <li>
+                    Only use photos of you, where your face is clear, taken recently enough that you'd
+                    be recognised. No photos of other people without their consent.
+                </li>
                 <li>Don't include children in your photos, even your own.</li>
+                <li>No guns or weapons in your photos.</li>
                 <li>Answer questions honestly. The point is for someone to get to know the real you.</li>
             </ul>
 
@@ -45,7 +50,11 @@ export default function CommunityGuidelines() {
             <h2>Keep it appropriate</h2>
             <ul>
                 <li>No nudity or sexually explicit content, in photos, answers or messages.</li>
-                <li>No violent, graphic or illegal content.</li>
+                <li>No sexual content someone didn't ask for.</li>
+                <li>
+                    No violent, graphic or illegal content, including promoting violence, self-harm or
+                    drugs.
+                </li>
                 <li>Don't pressure anyone into anything they're not comfortable with.</li>
             </ul>
 
@@ -77,7 +86,8 @@ export default function CommunityGuidelines() {
             <p>
                 You can end a connection, block or report someone at any time from the safety menu.
                 Reports are confidential, so the other person won't know it was you. We review them
-                within 24 hours.
+                within 24 hours. Blocking someone ends any connection with them, and you'll never be
+                matched again.
             </p>
 
             <h2>What happens if someone breaks these</h2>
@@ -85,7 +95,14 @@ export default function CommunityGuidelines() {
                 Everything is checked before others see it, and we remove anything that breaks
                 these guidelines. Depending on what happened, we may warn, suspend or permanently
                 ban an account. Serious cases, especially anything involving a risk to someone's
-                safety, may be passed to the police.
+                safety, may be passed to the police. If you think we banned you by mistake, email{" "}
+                <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+            </p>
+
+            <h2>Changes</h2>
+            <p>
+                If we change these guidelines in a way that matters, you'll be asked to accept the
+                new version in the app before your next match.
             </p>
 
             <h2>Contact</h2>
