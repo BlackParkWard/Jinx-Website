@@ -25,7 +25,7 @@ export default function Privacy() {
                 <li>We only collect what the app needs to match you and keep people safe.</li>
                 <li>Your location is coarse. A match only ever sees a distance band, never where you are.</li>
                 <li>We don't sell your data and there are no ads.</li>
-                <li>The AI that suggests questions never sees your name, photos or location.</li>
+                <li>We never send your name, photos or location to the AI that suggests questions.</li>
                 <li>Deleting your account in the app removes your profile, photos and conversations.</li>
             </ul>
 
@@ -52,8 +52,9 @@ export default function Privacy() {
             </p>
             <p>
                 <strong>Your device.</strong> A push notification token, so we can tell you when your
-                match arrives, plus privacy-friendly usage analytics and crash reports that help us
-                fix problems.
+                match arrives. Crash reports too, but only if you've chosen to share analytics with
+                app developers in iOS Settings. They don't include your messages or photos. We don't
+                use an analytics service.
             </p>
 
             <h2>How we use it</h2>
@@ -64,7 +65,7 @@ export default function Privacy() {
                 <li>To check photos, answers and messages before anyone else sees them.</li>
                 <li>To handle reports, enforce our <a href="/terms">terms</a> and keep Jinx safe.</li>
                 <li>To send the notifications you've allowed.</li>
-                <li>To understand how the app is used and fix what breaks.</li>
+                <li>To fix what breaks, using crash reports.</li>
             </ul>
             <p>
                 Under UK data protection law, we rely on providing the service you signed up for,
@@ -88,11 +89,13 @@ export default function Privacy() {
             <p>
                 <strong>Suggesting questions.</strong> We send your interests and profile answers,
                 with no name, photos, location or account details, so it can suggest questions you
-                and your match will both enjoy.
+                and your match will both enjoy. Your answers are sent as you wrote them, so anything
+                you put in them (a name, say) goes too.
             </p>
             <p>
                 <strong>Checking content.</strong> Answers, messages, bios and profile answers are
-                checked before they're shown. Each profile photo is also sent once to be checked,
+                checked before they're shown. Each one is sent as you wrote it, so a message with
+                contact details in it is sent with them. Each profile photo is also sent once to be checked,
                 as the image alone with no name or other identifier attached. Some content is
                 reviewed by a person on our team, for example when the automated check can't decide
                 or when someone reports it.
@@ -107,8 +110,11 @@ export default function Privacy() {
             <ul>
                 <li><strong>Supabase</strong>: our database, file storage and server functions.</li>
                 <li><strong>Anthropic</strong>: question suggestions and content checks, as above.</li>
-                <li><strong>Apple</strong>: Sign in with Apple and push notifications.</li>
-                <li><strong>TelemetryDeck and Sentry</strong>: anonymous usage analytics and crash reports.</li>
+                <li>
+                    <strong>Apple</strong>: Sign in with Apple and push notifications, and crash reports
+                    if you've chosen to share analytics with app developers. Apple gives them to us
+                    without your name or account.
+                </li>
             </ul>
             <p>
                 Some of these providers process data outside the UK. When they do, it's protected by
@@ -133,9 +139,13 @@ export default function Privacy() {
                 </li>
                 <li>
                     Server logs can mention an account when something fails, and are deleted on our
-                    providers' standard schedules, usually within 30 days.
+                    hosting provider's own schedule.
                 </li>
             </ul>
+            <p>
+                Safety reports are deleted 1 year after we resolve them. We don't keep backups of
+                the database, so deleted data is gone.
+            </p>
 
             <h2>Your rights</h2>
             <p>
@@ -164,6 +174,7 @@ export default function Privacy() {
             <h2>Contact</h2>
             <p>
                 Questions about privacy? Email <a href={`mailto:${CONTACT_EMAIL}`}>{CONTACT_EMAIL}</a>.
+                This is also where to appeal a ban.
             </p>
         </LegalPage>
     );
