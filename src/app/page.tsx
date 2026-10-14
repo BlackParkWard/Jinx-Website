@@ -1,54 +1,22 @@
-import {
-  Tagline,
-  DailyDrop,
-  Conversation,
-  OneAtATime,
-  Moments,
-  Safety,
-  Faq,
-  Footer,
-  FlowLine,
-} from "@/components";
 import Image from "next/image";
 
 export default function Home() {
   return (
-    <div className="flex font-sans bg-white h-full px-6 flex flex-col">
-        <section className="relative isolate -mx-6 mb-20 overflow-hidden pb-20">
-          {/* the flash photo is small, so a dark wash hides the softness */}
-          <Image
-            src="/flash_photo2.jpg"
-            alt=""
-            fill
-            preload
-            sizes="100vw"
-            className="-z-10 object-cover object-[50%_40%]"
-          />
-          <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
-          <Tagline />
-          <div className="flex  gap-2 justify-center h-max items-center animate-[fade-up_0.7s_ease-out_320ms_both] motion-reduce:animate-none">
-            <button 
-              style={{ backgroundColor: process.env.NEXT_PUBLIC_BRAND_COLOR }}
-              className="text-white px-5 pl-4 py-2 rounded-full text-lg hover:brightness-95 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-[0.98] transition duration-200 flex gap-2 items-center justify-center"
-            >
-              <Image src="/apple.svg" alt="App Store" width={24} height={24} />
-              Get the app
-            </button>
-            <button className=" px-5 py-2 rounded-full  text-lg bg-gray-200 text-gray-800 hover:bg-gray-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition duration-200">
-              Create account
-            </button>
-          </div>
-        </section>
+    <main className="flex min-h-[calc(100dvh)] items-center justify-center bg-white px-6 font-sans flex-col gap-4">
+      <span className="relative block h-18 aspect-[1510/758] overflow-hidden">
+                              <Image
+                                  src="/jinx_logo.svg"
+                                  alt="Jinx"
+                                  width={2000}
+                                  height={2000}
+                                  sizes="100px"
+                                  preload
+                                  className="absolute max-w-none fill-blue-500"
+                                  style={{ width: "132.45%", height: "auto", left: "-13.58%", top: "-83.25%" }}
+                              />
+                          </span>
 
-        <FlowLine>
-          <DailyDrop />
-          <Conversation />
-          <OneAtATime />
-          <Moments />
-          <Safety />
-          <Faq />
-        </FlowLine>
-        <Footer />
-    </div>
+                          <p className="text-xs text-gray-500 ">© 2026 Jinx. All rights reserved.</p>
+    </main>
   );
 }
