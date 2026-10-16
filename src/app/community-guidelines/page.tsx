@@ -1,3 +1,4 @@
+// Mirrors docs/legal/community-guidelines.md in BlackParkWard/Spark. A change to one must be made to the other.
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
