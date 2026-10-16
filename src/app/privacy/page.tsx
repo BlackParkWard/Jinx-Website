@@ -1,3 +1,4 @@
+// Mirrors docs/legal/privacy-policy.md in BlackParkWard/Spark. A change to one must be made to the other.
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
@@ -132,8 +133,9 @@ export default function Privacy() {
                     identifier so the same account can't sign up again.
                 </li>
                 <li>
-                    Server logs can mention an account when something fails, and are deleted on our
-                    providers' standard schedules, usually within 30 days.
+                    Server logs can mention an account when something fails, and record your account
+                    ID once when you delete your account. They're deleted on our providers' standard
+                    schedules, usually within 30 days.
                 </li>
             </ul>
 
