@@ -4,6 +4,7 @@ import {
   Conversation,
   OneAtATime,
   Moments,
+  Free,
   Safety,
   Faq,
   Footer,
@@ -45,6 +46,7 @@ export default function Home() {
           <Conversation />
           <OneAtATime />
           <Moments />
+          <Free />
           <Safety />
           <Faq />
         </FlowLine>

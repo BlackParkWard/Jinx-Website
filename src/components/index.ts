@@ -3,6 +3,7 @@ import DailyDrop from "./DailyDrop";
 import Faq from "./Faq";
 import FlowLine from "./FlowLine";
 import Footer from "./Footer";
+import Free from "./Free";
 import Header from "./Header";
 import LogoOutline from "./LogoOutline";
 import Moments from "./Moments";
@@ -18,6 +19,7 @@ export {
   Conversation,
   OneAtATime,
   Moments,
+  Free,
   Safety,
   Faq,
   Footer,
