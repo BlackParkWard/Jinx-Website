@@ -111,7 +111,7 @@ const DailyDrop = () => {
 
       {/*
         The profile and the Jinx screen are separate cards that crossfade.
-        Laying the dark screen over the white card let a hairline of white
+        Laying one over the other let a hairline of the card beneath
         show round the rounded edges.
       */}
       <div ref={cardRef} className="grid" aria-hidden>
@@ -129,9 +129,7 @@ const DailyDrop = () => {
               alt=""
               fill
               sizes="276px"
-              className={`object-cover object-[50%_35%] transition-transform duration-[2400ms] ease-out motion-reduce:transition-none ${
-                stage === "match" ? "scale-105" : "scale-100"
-              }`}
+              className="object-cover object-[50%_35%]"
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/25" />
             <span className="absolute top-3 left-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-gray-900 uppercase backdrop-blur">
@@ -218,15 +216,14 @@ const DailyDrop = () => {
 
         {/* it's a Jinx */}
         <div
-          className={`${CARD} relative flex flex-col items-center justify-center overflow-hidden px-6 text-center text-white ${
+          className={`${CARD} relative flex flex-col items-center justify-center overflow-hidden bg-white px-6 text-center text-gray-900 ring-1 ring-black/5 ${
             spark
               ? "scale-100 opacity-100"
               : "pointer-events-none scale-[1.04] opacity-0"
           }`}
-          style={{ backgroundColor: BRAND }}
         >
-          {/* a soft light from above, so the dark card has some depth */}
-          <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-80 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" />
+          {/* a soft wash from above, so the card has some depth */}
+          <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-80 -translate-x-1/2 rounded-full bg-gray-100 blur-3xl" />
 
           <div key={round} className="relative flex flex-col items-center">
             <div className="relative mb-6 flex items-center">
@@ -234,8 +231,9 @@ const DailyDrop = () => {
                 EMBERS.map((e) => (
                   <span
                     key={`${e.dx}-${e.dy}`}
-                    className="absolute top-1/2 left-1/2 -mt-[3px] -ml-[3px] h-1.5 w-1.5 rounded-full bg-white animate-[spark-ember_0.9s_ease-out_both]"
+                    className="absolute top-1/2 left-1/2 -mt-[3px] -ml-[3px] h-1.5 w-1.5 rounded-full animate-[spark-ember_0.9s_ease-out_both]"
                     style={{
+                      backgroundColor: BRAND,
                       ["--dx" as string]: `${e.dx}px`,
                       ["--dy" as string]: `${e.dy}px`,
                       animationDelay: `${e.delay}ms`,
@@ -243,7 +241,7 @@ const DailyDrop = () => {
                   />
                 ))}
               {/* Maya and the ji mark slide in to meet */}
-              <span className="relative h-16 w-16 overflow-hidden rounded-full ring-4 ring-white/15 animate-[avatar-left_0.7s_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none">
+              <span className="relative h-16 w-16 overflow-hidden rounded-full ring-4 ring-white animate-[avatar-left_0.7s_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none">
                 <Image
                   src="/profile_image_example.jpg"
                   alt=""
@@ -252,7 +250,7 @@ const DailyDrop = () => {
                   className="object-cover object-[50%_30%]"
                 />
               </span>
-              <span className="relative -ml-3 flex h-16 w-16 items-center justify-center rounded-full bg-white ring-4 ring-white/15 animate-[avatar-right_0.7s_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none">
+              <span className="relative -ml-3 flex h-16 w-16 items-center justify-center rounded-full bg-gray-100 ring-4 ring-white animate-[avatar-right_0.7s_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none">
                 <Image
                   src="/jinx-mark-brand.png"
                   alt=""
@@ -267,17 +265,17 @@ const DailyDrop = () => {
               alt=""
               width={480}
               height={238}
-              className="h-12 w-auto animate-[fade-up_0.5s_ease-out_200ms_both] motion-reduce:animate-none"
+              className="h-12 w-auto brightness-0 animate-[fade-up_0.5s_ease-out_200ms_both] motion-reduce:animate-none"
             />
-            <p className="mt-3 text-white/70 animate-[fade-up_0.5s_ease-out_300ms_both] motion-reduce:animate-none">
+            <p className="mt-3 text-gray-500 animate-[fade-up_0.5s_ease-out_300ms_both] motion-reduce:animate-none">
               You and Maya both connected.
             </p>
-            <span
-              className="mt-8 rounded-full bg-white px-5 py-2.5 text-sm font-semibold animate-[fade-up_0.5s_ease-out_400ms_both] motion-reduce:animate-none"
-              style={{ color: BRAND }}
+            {/* <span
+              className="mt-8 rounded-full px-5 py-2.5 text-sm font-semibold text-white animate-[fade-up_0.5s_ease-out_400ms_both] motion-reduce:animate-none"
+              style={{ backgroundColor: BRAND }}
             >
               Start your first round
-            </span>
+            </span> */}
           </div>
         </div>
       </div>
