@@ -4,6 +4,7 @@ import Faq from "./Faq";
 import FlowLine from "./FlowLine";
 import Footer from "./Footer";
 import Header from "./Header";
+import LogoOutline from "./LogoOutline";
 import Moments from "./Moments";
 import OneAtATime from "./OneAtATime";
 import Safety from "./Safety";
@@ -11,6 +12,7 @@ import Tagline from "./Tagline";
 
 export {
   Header,
+  LogoOutline,
   Tagline,
   DailyDrop,
   Conversation,
