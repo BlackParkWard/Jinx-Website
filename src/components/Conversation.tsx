@@ -154,7 +154,7 @@ const Conversation = () => {
       <div
         ref={cardRef}
         aria-hidden
-        className="relative flex h-[460px] w-[min(300px,calc(100vw-4rem))] shrink-0 flex-col rounded-[28px] bg-white p-5 shadow-[0_24px_48px_-16px_rgb(0_0_0/0.25)] ring-1 ring-black/5"
+        className="relative mx-auto  flex h-[460px] w-[min(300px,calc(100vw-4rem))] shrink-0 flex-col rounded-[28px] bg-white p-5 shadow-[0_24px_48px_-16px_rgb(0_0_0/0.25)] ring-1 ring-black/5"
       >
         <div className="flex items-center justify-between">
           <p className="text-[11px] font-semibold tracking-wider text-gray-400 uppercase">
@@ -293,14 +293,7 @@ const Conversation = () => {
               >
                 Your answer stays hidden until Maya answers too.
               </p>
-              <span
-                className={`justify-self-center rounded-full px-5 py-2 text-sm font-semibold text-white transition-opacity duration-500 ${
-                  revealed ? "opacity-100 delay-1000" : "opacity-0"
-                }`}
-                style={{ backgroundColor: BRAND }}
-              >
-                Next round
-              </span>
+
             </div>
           </div>
         </div>

@@ -9,6 +9,7 @@ import {
   Faq,
   Footer,
   FlowLine,
+  LogoOutline
 } from "@/components";
 import Image from "next/image";
 
@@ -18,7 +19,7 @@ export default function Home() {
         <section className="relative isolate -mx-6 mb-20 overflow-hidden pb-20">
           {/* the flash photo is small, so a dark wash hides the softness */}
           <Image
-            src="/flash_photo2.jpg"
+            src="/flash_photo4.jpg"
             alt=""
             fill
             preload
