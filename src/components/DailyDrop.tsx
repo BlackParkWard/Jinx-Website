@@ -262,10 +262,14 @@ const DailyDrop = () => {
                 />
               </span>
             </div>
-            <p className="text-3xl font-bold animate-[fade-up_0.5s_ease-out_200ms_both] motion-reduce:animate-none">
-              It&apos;s a Jinx!
-            </p>
-            <p className="mt-2 text-white/70 animate-[fade-up_0.5s_ease-out_300ms_both] motion-reduce:animate-none">
+            <Image
+              src="/jinx-wordmark-white.png"
+              alt=""
+              width={480}
+              height={238}
+              className="h-12 w-auto animate-[fade-up_0.5s_ease-out_200ms_both] motion-reduce:animate-none"
+            />
+            <p className="mt-3 text-white/70 animate-[fade-up_0.5s_ease-out_300ms_both] motion-reduce:animate-none">
               You and Maya both connected.
             </p>
             <span
