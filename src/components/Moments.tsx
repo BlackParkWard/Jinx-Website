@@ -5,8 +5,9 @@ import useInView from "./useInView";
 
 /*
   The panel waits, dim and colourless, until the scroll line reaches its
-  node (FlowLine sets data-lit on the text). Then a camera flash pops, the
-  photo eases back into colour and the words rise in. Scrolling back up plays it in reverse.
+  node (FlowLine sets data-lit on it). Then a camera flash pops, the photo
+  eases back into colour and the words rise in. Scrolling back up plays it
+  in reverse.
 */
 const Moments = () => {
   const { ref, seen } = useInView<HTMLElement>();
@@ -32,12 +33,12 @@ const Moments = () => {
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/50 to-transparent" />
 
         {/*
-          the flow node. The spans set their own colours so the line's
-          grey-until-reached doesn't touch the text on the photo.
+          the flow node sits near the top of the photo rather than on the
+          text, so the line reaches it as the photo comes into view
         */}
-        <p
-          data-flow-node
-          className="text-2xl leading-tight font-bold tracking-tight sm:text-3xl md:text-5xl"
+        <span aria-hidden="true" data-flow-node className="absolute top-12 left-0" />
+
+        <p className="text-2xl leading-tight font-bold tracking-tight sm:text-3xl md:text-5xl"
         >
           <span
             className="block translate-y-6 text-white opacity-0 transition-all delay-300 duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:transition-opacity group-has-[[data-lit]]/moments:translate-y-0 group-has-[[data-lit]]/moments:opacity-100"
