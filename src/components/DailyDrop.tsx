@@ -6,22 +6,21 @@ import useInView from "./useInView";
 
 const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "rgb(19, 19, 19)";
 
-type Stage = "countdown" | "reveal" | "connect" | "waiting" | "spark";
+type Stage = "match" | "connect" | "waiting" | "spark";
 
 // how long each stage of the loop holds, in ms
 const TIMELINE: [Stage, number][] = [
-  ["countdown", 2700],
-  ["reveal", 2600],
+  ["match", 2400],
   ["connect", 1000],
-  ["waiting", 2000],
-  ["spark", 3800],
+  ["waiting", 1900],
+  ["spark", 3600],
 ];
 
 const STEPS: { title: string; body: string; stages: Stage[] }[] = [
   {
     title: "Your match drops at 7pm",
     body: "One person a day, picked for you. No feed, no swiping.",
-    stages: ["countdown", "reveal"],
+    stages: ["match"],
   },
   {
     title: "Connect, or let it pass",
@@ -41,16 +40,18 @@ const EMBERS = Array.from({ length: 12 }, (_, i) => {
   return {
     dx: Math.cos(angle) * dist,
     dy: Math.sin(angle) * dist,
-    delay: (i % 3) * 60,
+    delay: 150 + (i % 3) * 60,
   };
 });
 
-// Safari needs the prefixed property to reliably hide the flipped face
-const FACE = "backface-hidden [-webkit-backface-visibility:hidden]";
+// both cards share a footprint and sit stacked in one grid cell
+const CARD =
+  "col-start-1 row-start-1 h-[460px] w-[min(300px,calc(100vw-4rem))] rounded-[28px] shadow-[0_24px_48px_-16px_rgb(0_0_0/0.25)] transition-[opacity,transform] duration-600 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none";
 
 const DailyDrop = () => {
-  const [stage, setStage] = useState<Stage>("countdown");
-  const [seconds, setSeconds] = useState(3);
+  const [stage, setStage] = useState<Stage>("match");
+  // bumps every loop so the spark's one-shot animations replay
+  const [round, setRound] = useState(0);
   const [reduceMotion, setReduceMotion] = useState(false);
   const { ref: sectionRef, seen } = useInView<HTMLElement>();
   // the loop runs only while the card itself is mostly on screen
@@ -62,7 +63,6 @@ const DailyDrop = () => {
   useEffect(() => {
     if (window.matchMedia("(prefers-reduced-motion: reduce)").matches) {
       setReduceMotion(true);
-      setStage("reveal");
     }
   }, []);
 
@@ -71,20 +71,13 @@ const DailyDrop = () => {
     const i = TIMELINE.findIndex(([s]) => s === stage);
     const id = setTimeout(() => {
       const next = TIMELINE[(i + 1) % TIMELINE.length][0];
-      // reset in the same render as the stage change, so "01" never flashes
-      if (next === "countdown") setSeconds(3);
+      if (next === "spark") setRound((r) => r + 1);
       setStage(next);
     }, TIMELINE[i][1]);
     return () => clearTimeout(id);
   }, [stage, reduceMotion, inView]);
 
-  useEffect(() => {
-    if (stage !== "countdown" || !inView) return;
-    const id = setInterval(() => setSeconds((s) => Math.max(1, s - 1)), 900);
-    return () => clearInterval(id);
-  }, [stage, inView]);
-
-  const flipped = stage !== "countdown";
+  const spark = stage === "spark";
   const waiting = stage === "waiting";
 
   return (
@@ -116,203 +109,171 @@ const DailyDrop = () => {
         </ol>
       </div>
 
-      <div ref={cardRef} className="relative perspective-[1200px]" aria-hidden>
-        {/* soft glow behind the card when it's a match */}
+      {/*
+        The profile and the Jinx screen are separate cards that crossfade.
+        Laying the dark screen over the white card let a hairline of white
+        show round the rounded edges.
+      */}
+      <div ref={cardRef} className="grid" aria-hidden>
+        {/* the match */}
         <div
-          className={`absolute inset-6 rounded-full blur-3xl transition-all duration-700 ${
-            stage === "spark" ? "scale-110 opacity-40" : "scale-90 opacity-0"
-          }`}
-          style={{ backgroundColor: BRAND }}
-        />
-        <div
-          className={`relative h-[440px] w-[min(300px,calc(100vw-4rem))] transition-transform duration-700 ease-in-out will-change-transform transform-3d motion-reduce:transition-none ${
-            flipped ? "rotate-y-180" : ""
+          className={`${CARD} flex flex-col overflow-hidden bg-white p-3 ring-1 ring-black/5 ${
+            spark
+              ? "pointer-events-none scale-[0.94] opacity-0"
+              : "scale-100 opacity-100"
           }`}
         >
-          {/* back of the card: waiting for today's drop */}
-          <div
-            className={`absolute inset-0 flex flex-col items-center justify-center gap-4 rounded-3xl bg-white shadow-xl ring-1 ring-gray-100 ${FACE}`}
-          >
+          <div className="relative h-60 shrink-0 overflow-hidden rounded-[20px]">
             <Image
-              src="/jinx-mark-brand.png"
+              src="/profile_image_example.jpg"
               alt=""
-              width={240}
-              height={328}
-              className="mb-2 h-16 w-auto brightness-0 animate-pulse motion-reduce:animate-none"
+              fill
+              sizes="276px"
+              className={`object-cover object-[50%_35%] transition-transform duration-[2400ms] ease-out motion-reduce:transition-none ${
+                stage === "match" ? "scale-105" : "scale-100"
+              }`}
             />
-            <p className="text-sm uppercase tracking-widest text-gray-500">
-              Today&apos;s match in
+            <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/0 to-black/25" />
+            <span className="absolute top-3 left-3 rounded-full bg-white/90 px-2.5 py-1 text-[11px] font-semibold tracking-wide text-gray-900 uppercase backdrop-blur">
+              Today&apos;s match
+            </span>
+            <div className="absolute bottom-3 left-4 text-left">
+              <p className="text-2xl font-bold text-white">Maya, 28</p>
+              <p className="text-sm text-white/85">Less than 5 miles away</p>
+            </div>
+          </div>
+
+          <div className="flex-1 px-1 pt-4">
+            <p className="text-[11px] font-semibold tracking-wider text-gray-400 uppercase">
+              A perfect Sunday
             </p>
-            <p className="font-nunito text-5xl font-extrabold text-gray-900 tabular-nums">
-              00<span className="text-gray-300">:</span>00
-              <span className="text-gray-300">:</span>
-              <span style={{ color: BRAND }}>0</span>
-              {/*
-                the seconds roll up like an odometer. Only the transform
-                changes, and the reset back to 3 snaps without a transition.
-              */}
-              <span className="inline-flex h-[1.1em] overflow-hidden leading-[1.1em]">
-                <span
-                  className={`flex flex-col will-change-transform ${
-                    seconds === 3
-                      ? ""
-                      : "transition-transform duration-500 ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:transition-none"
-                  }`}
-                  style={{
-                    color: BRAND,
-                    transform: `translateY(${-(3 - seconds) * 1.1}em)`,
-                  }}
-                >
-                  {[3, 2, 1].map((n) => (
-                    <span key={n} className="h-[1.1em]">
-                      {n}
-                    </span>
-                  ))}
+            <p className="mt-1 leading-snug text-gray-800">
+              Long walk, roast dinner, early night.
+            </p>
+            <div className="mt-3 flex flex-wrap gap-1.5 text-xs text-gray-600">
+              {["Hiking", "Cooking", "Live music"].map((tag) => (
+                <span key={tag} className="rounded-full bg-gray-100 px-2.5 py-1">
+                  {tag}
                 </span>
+              ))}
+            </div>
+          </div>
+
+          {/* both states stay mounted and crossfade, so nothing jumps */}
+          <div className="grid h-11 *:col-start-1 *:row-start-1">
+            <div
+              className={`flex gap-2 transition-opacity duration-300 ${
+                waiting ? "opacity-0" : "opacity-100"
+              }`}
+            >
+              <span className="flex flex-1 items-center justify-center rounded-full bg-gray-100 font-medium text-gray-700">
+                Pass
+              </span>
+              <span className="relative flex flex-1">
+                <span
+                  className={`absolute inset-0 rounded-full ${
+                    stage === "connect"
+                      ? "animate-[tap-halo_700ms_ease-out_250ms_both]"
+                      : "opacity-0"
+                  }`}
+                  style={{ backgroundColor: BRAND }}
+                />
+                <span
+                  className={`relative flex flex-1 items-center justify-center rounded-full font-semibold text-white ${
+                    stage === "connect"
+                      ? "animate-[tap-press_450ms_ease-out_both]"
+                      : ""
+                  }`}
+                  style={{ backgroundColor: BRAND }}
+                >
+                  Connect
+                </span>
+                <span
+                  className={`absolute top-1/2 left-1/2 -mt-5 -ml-5 h-10 w-10 rounded-full bg-white/30 ${
+                    stage === "connect"
+                      ? "animate-[tap-touch_500ms_ease-out_both]"
+                      : "opacity-0"
+                  }`}
+                />
+              </span>
+            </div>
+            <p
+              className={`flex items-center justify-center gap-1.5 text-gray-500 transition-opacity duration-300 ${
+                waiting ? "opacity-100 delay-150" : "opacity-0"
+              }`}
+            >
+              Waiting on Maya
+              <span className="flex gap-1 pt-1">
+                {[0, 150, 300].map((d) => (
+                  <span
+                    key={d}
+                    className="h-1 w-1 rounded-full bg-gray-400 animate-[dot-wave_1.2s_ease-in-out_infinite]"
+                    style={{ animationDelay: `${d}ms` }}
+                  />
+                ))}
               </span>
             </p>
           </div>
+        </div>
 
-          {/* front of the card: the match */}
-          <div
-            className={`absolute inset-0 flex flex-col overflow-hidden rounded-3xl bg-white p-4 shadow-xl ring-1 ring-gray-100 rotate-y-180 ${FACE}`}
-          >
-            <div className="relative h-52 overflow-hidden rounded-2xl">
-              <Image
-                src="/profile_image_example.jpg"
-                alt=""
-                fill
-                sizes="268px"
-                className="object-cover object-[50%_35%]"
-              />
-              <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
-              <Image
-                src="/jinx-wordmark-white.png"
-                alt=""
-                width={480}
-                height={238}
-                className="absolute top-3 left-4 h-5 w-auto opacity-90 drop-shadow"
-              />
-              <div className="absolute bottom-3 left-4 text-left">
-                <p className="text-xl font-semibold text-white">Maya, 28</p>
-                <p className="text-sm text-white/85">Less than 5 miles away</p>
-              </div>
-            </div>
-            <div className="mt-4 flex-1">
-              <p className="text-xs uppercase tracking-wider text-gray-500">
-                A perfect Sunday
-              </p>
-              <p className="mt-1 text-gray-800">
-                Long walk, roast dinner, early night.
-              </p>
-            </div>
+        {/* it's a Jinx */}
+        <div
+          className={`${CARD} relative flex flex-col items-center justify-center overflow-hidden px-6 text-center text-white ${
+            spark
+              ? "scale-100 opacity-100"
+              : "pointer-events-none scale-[1.04] opacity-0"
+          }`}
+          style={{ backgroundColor: BRAND }}
+        >
+          {/* a soft light from above, so the dark card has some depth */}
+          <div className="pointer-events-none absolute -top-24 left-1/2 h-64 w-80 -translate-x-1/2 rounded-full bg-white/10 blur-3xl" />
 
-            {/* both states stay mounted and crossfade, so nothing jumps */}
-            <div className="grid h-11 *:col-start-1 *:row-start-1">
-              <div
-                className={`flex gap-2 transition-opacity duration-300 ${
-                  waiting ? "opacity-0" : "opacity-100"
-                }`}
-              >
-                <span className="flex flex-1 items-center justify-center rounded-full bg-gray-100 text-gray-700">
-                  Decline
-                </span>
-                {/*
-                  The tap is keyframes on layers that are composited from the
-                  start (no transitions, no box-shadow ring), which keeps iOS
-                  Safari from flickering inside the 3D-flipped card.
-                */}
-                <span className="relative flex flex-1">
+          <div key={round} className="relative flex flex-col items-center">
+            <div className="relative mb-6 flex items-center">
+              {!reduceMotion &&
+                EMBERS.map((e) => (
                   <span
-                    className={`absolute inset-0 rounded-full will-change-transform ${
-                      stage === "connect"
-                        ? "animate-[tap-halo_700ms_ease-out_250ms_both]"
-                        : "opacity-0"
-                    }`}
-                    style={{ backgroundColor: BRAND }}
+                    key={`${e.dx}-${e.dy}`}
+                    className="absolute top-1/2 left-1/2 -mt-[3px] -ml-[3px] h-1.5 w-1.5 rounded-full bg-white animate-[spark-ember_0.9s_ease-out_both]"
+                    style={{
+                      ["--dx" as string]: `${e.dx}px`,
+                      ["--dy" as string]: `${e.dy}px`,
+                      animationDelay: `${e.delay}ms`,
+                    }}
                   />
-                  <span
-                    className={`relative flex flex-1 items-center justify-center rounded-full font-semibold text-white will-change-transform ${
-                      stage === "connect"
-                        ? "animate-[tap-press_450ms_ease-out_both]"
-                        : ""
-                    }`}
-                    style={{ backgroundColor: BRAND }}
-                  >
-                    Connect
-                  </span>
-                  <span
-                    className={`absolute top-1/2 left-1/2 -mt-5 -ml-5 h-10 w-10 rounded-full bg-black/15 will-change-transform ${
-                      stage === "connect"
-                        ? "animate-[tap-touch_500ms_ease-out_both]"
-                        : "opacity-0"
-                    }`}
-                  />
-                </span>
-              </div>
-              <p
-                className={`flex items-center justify-center gap-1.5 text-gray-500 transition-opacity duration-300 ${
-                  waiting ? "opacity-100 delay-150" : "opacity-0"
-                }`}
-              >
-                Waiting on them
-                <span className="flex gap-1 pt-1">
-                  {[0, 150, 300].map((d) => (
-                    <span
-                      key={d}
-                      className="h-1 w-1 rounded-full bg-gray-400 animate-[dot-wave_1.2s_ease-in-out_infinite]"
-                      style={{ animationDelay: `${d}ms` }}
-                    />
-                  ))}
-                </span>
-              </p>
-            </div>
-
-            {/*
-              the spark moment. It fades in, but when the card flips back to
-              the countdown it stays solid until the face has turned away
-              (the flip is 700ms), otherwise a half-faded teal flashes past.
-            */}
-            <div
-              className={`absolute inset-0 flex flex-col items-center justify-center gap-3 text-white transition-opacity ${
-                stage === "spark"
-                  ? "opacity-100 duration-500"
-                  : "pointer-events-none opacity-0 duration-0 delay-700"
-              }`}
-              style={{ backgroundColor: BRAND }}
-            >
-              {(stage === "spark" || stage === "countdown") && (
-                <div className="relative mb-2 h-16 w-16">
-                  {!reduceMotion &&
-                    EMBERS.map((e) => (
-                      <span
-                        key={`${e.dx}-${e.dy}`}
-                        className="absolute top-1/2 left-1/2 -mt-1 -ml-1 h-2 w-2 rounded-full bg-white animate-[spark-ember_0.9s_ease-out_both]"
-                        style={{
-                          ["--dx" as string]: `${e.dx}px`,
-                          ["--dy" as string]: `${e.dy}px`,
-                          animationDelay: `${e.delay}ms`,
-                        }}
-                      />
-                    ))}
-                  <Image
-                    src="/jinx-mark-white.png"
-                    alt=""
-                    width={240}
-                    height={328}
-                    className="mx-auto block h-16 w-auto animate-[spark-pop_0.6s_ease-out_both] motion-reduce:animate-none"
-                  />
-                </div>
-              )}
-              <p className="text-3xl font-bold">It&apos;s a Jinx!</p>
-              <p className="text-white/85">You both connected.</p>
-              <span
-                className="mt-4 rounded-full bg-white px-5 py-2 text-sm font-semibold"
-                style={{ color: BRAND }}
-              >
-                Start your first round
+                ))}
+              {/* Maya and the ji mark slide in to meet */}
+              <span className="relative h-16 w-16 overflow-hidden rounded-full ring-4 ring-white/15 animate-[avatar-left_0.7s_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none">
+                <Image
+                  src="/profile_image_example.jpg"
+                  alt=""
+                  fill
+                  sizes="64px"
+                  className="object-cover object-[50%_30%]"
+                />
+              </span>
+              <span className="relative -ml-3 flex h-16 w-16 items-center justify-center rounded-full bg-white ring-4 ring-white/15 animate-[avatar-right_0.7s_cubic-bezier(0.22,1,0.36,1)_both] motion-reduce:animate-none">
+                <Image
+                  src="/jinx-mark-brand.png"
+                  alt=""
+                  width={240}
+                  height={328}
+                  className="h-8 w-auto brightness-0 animate-[spark-pop_0.6s_ease-out_250ms_both] motion-reduce:animate-none"
+                />
               </span>
             </div>
+            <p className="text-3xl font-bold animate-[fade-up_0.5s_ease-out_200ms_both] motion-reduce:animate-none">
+              It&apos;s a Jinx!
+            </p>
+            <p className="mt-2 text-white/70 animate-[fade-up_0.5s_ease-out_300ms_both] motion-reduce:animate-none">
+              You and Maya both connected.
+            </p>
+            <span
+              className="mt-8 rounded-full bg-white px-5 py-2.5 text-sm font-semibold animate-[fade-up_0.5s_ease-out_400ms_both] motion-reduce:animate-none"
+              style={{ color: BRAND }}
+            >
+              Start your first round
+            </span>
           </div>
         </div>
       </div>

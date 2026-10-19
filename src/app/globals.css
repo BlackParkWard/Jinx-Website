@@ -88,6 +88,29 @@ body {
   }
 }
 
+/* the two avatars on the Jinx screen slide in from either side to meet */
+@keyframes avatar-left {
+  from {
+    transform: translateX(-28px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
+@keyframes avatar-right {
+  from {
+    transform: translateX(28px);
+    opacity: 0;
+  }
+  to {
+    transform: none;
+    opacity: 1;
+  }
+}
+
 @keyframes fade-up {
   from {
     transform: translateY(12px);
