@@ -5,8 +5,8 @@ import useInView from "./useInView";
 
 /*
   The panel waits, dim and colourless, until the scroll line reaches its
-  node (FlowLine sets data-lit on the text). Then the photo settles into
-  colour and the words rise in. Scrolling back up plays it in reverse.
+  node (FlowLine sets data-lit on the text). Then a camera flash pops, the
+  photo eases back into colour and the words rise in. Scrolling back up plays it in reverse.
 */
 const Moments = () => {
   const { ref, seen } = useInView<HTMLElement>();
@@ -23,8 +23,10 @@ const Moments = () => {
           alt=""
           fill
           sizes="(min-width: 896px) 896px, 100vw"
-          className="-z-10 scale-110 object-cover object-[70%_45%] brightness-75 grayscale transition-[transform,filter] duration-[1600ms] ease-[cubic-bezier(0.22,1,0.36,1)] motion-reduce:scale-100 motion-reduce:transition-[filter] group-has-[[data-lit]]/moments:scale-100 group-has-[[data-lit]]/moments:brightness-100 group-has-[[data-lit]]/moments:grayscale-0"
+          className="-z-10 scale-110 object-cover object-[70%_45%] brightness-75 grayscale transition-[scale,filter] duration-[2000ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:scale-100 motion-reduce:transition-[filter] group-has-[[data-lit]]/moments:scale-100 group-has-[[data-lit]]/moments:brightness-100 group-has-[[data-lit]]/moments:grayscale-0"
         />
+        {/* a camera flash as the line arrives, before the colour comes in */}
+        <div className="pointer-events-none absolute inset-0 z-10 bg-white opacity-0 motion-reduce:hidden group-has-[[data-lit]]/moments:animate-[camera-flash_900ms_ease-out_both]" />
         {/* the flash photo is small, so a wash hides the softness and carries the text */}
         <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
         <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/50 to-transparent" />

@@ -111,6 +111,19 @@ body {
   }
 }
 
+/* a quick white pop, like a camera flash going off (Moments) */
+@keyframes camera-flash {
+  0% {
+    opacity: 0;
+  }
+  12% {
+    opacity: 0.75;
+  }
+  100% {
+    opacity: 0;
+  }
+}
+
 @keyframes fade-up {
   from {
     transform: translateY(12px);
