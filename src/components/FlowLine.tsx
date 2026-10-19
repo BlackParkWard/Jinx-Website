@@ -1,6 +1,7 @@
 "use client";
 
 import { type ReactNode, useEffect, useRef, useState } from "react";
+import { JI, JI_VIEWBOX } from "./LogoOutline";
 
 const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "rgb(19, 19, 19)";
 
@@ -20,7 +21,7 @@ const offsetWithin = (el: HTMLElement, root: HTMLElement) => {
 
 /*
   A line down the left margin that draws itself as you scroll. Each element
-  marked data-flow-node gets a dot, and gets data-lit once the line reaches it
+  marked data-flow-node gets a ji mark, and gets data-lit once the line reaches it
   (globals.css greys out the ones not reached yet). The line ends at the last
   node.
 */
@@ -113,22 +114,30 @@ const FlowLine = ({ children }: { children: ReactNode }) => {
             className="flow-fill absolute inset-0 origin-top rounded-full will-change-transform"
             style={{ backgroundColor: BRAND }}
           />
+          {/* each checkpoint is a small ji mark, grey until the line reaches it */}
           {nodes.map((y, i) => {
             const lit = i < reached;
             const current = i === reached - 1;
             return (
               <span
                 key={y}
-                className={`absolute left-1/2 h-2.5 w-2.5 -translate-x-1/2 -translate-y-1/2 rounded-full border-2 bg-white transition-all duration-500 ${
+                // the white backing hides the line where it passes behind the mark
+                className={`absolute left-1/2 flex -translate-x-1/2 -translate-y-1/2 bg-white px-0.5 py-1 transition-transform duration-500 ${
                   current ? "scale-125" : ""
                 }`}
-                style={{
-                  top: y - start,
-                  borderColor: lit ? BRAND : "#e5e7eb",
-                  backgroundColor: lit ? BRAND : "#ffffff",
-                  boxShadow: current ? `0 0 0 5px color-mix(in srgb, ${BRAND} 15%, transparent)` : "none",
-                }}
-              />
+                style={{ top: y - start }}
+              >
+                <svg
+                  viewBox={JI_VIEWBOX}
+                  aria-hidden="true"
+                  className="h-5 w-auto transition-[fill] duration-500"
+                  style={{ fill: lit ? BRAND : "#d1d5db" }}
+                >
+                  {JI.map((d) => (
+                    <path key={d.slice(0, 16)} d={d} />
+                  ))}
+                </svg>
+              </span>
             );
           })}
         </div>
