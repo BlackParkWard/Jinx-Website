@@ -222,7 +222,7 @@ body {
   }
 }
 
-/* section headings stay grey until the scroll line reaches them (FlowLine) */
+/* section headings stay grey until you scroll to them (FlowLine) */
 [data-flow-node] {
   transition: color 0.5s ease;
 }
@@ -259,34 +259,23 @@ html {
 }
 
 /*
-  FlowLine: the fill grows as the line passes a mark 60% down the screen
-  (ANCHOR in FlowLine.tsx). The track's view timeline is inset to a zero-height
-  band at that mark, so the timeline runs from the track's top crossing it to
-  its bottom crossing it. Browsers without scroll-driven animations get the
-  transform from JavaScript instead.
+  Header: the pill's outline draws itself in as you read down the page,
+  both halves from the top middle, meeting at the bottom by the end.
+  Browsers without scroll-driven animations get the offset from JavaScript.
 */
-.flow-fill {
-  transform: scaleY(0);
-}
-
-@supports (animation-timeline: view()) {
-  .flow-track {
-    view-timeline: --flow block;
-    view-timeline-inset: 60% 40%;
-  }
-
-  .flow-fill {
-    animation: flow-fill linear both;
-    animation-timeline: --flow;
+@supports (animation-timeline: scroll()) {
+  .header-progress {
+    animation: header-progress linear both;
+    animation-timeline: scroll(root);
   }
 }
 
-@keyframes flow-fill {
+@keyframes header-progress {
   from {
-    transform: scaleY(0);
+    stroke-dashoffset: 1;
   }
   to {
-    transform: scaleY(1);
+    stroke-dashoffset: 0;
   }
 }
 
@@ -307,5 +296,14 @@ html {
   .logo-draw {
     animation: none;
     stroke-dashoffset: 0;
+  }
+}
+
+/* the header's pill animation is set inline, so switch it off here too */
+@media (prefers-reduced-motion: reduce) {
+  header,
+  header * {
+    transition-duration: 0s !important;
+    transition-delay: 0s !important;
   }
 }
