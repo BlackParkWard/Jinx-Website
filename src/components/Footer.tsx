@@ -12,7 +12,7 @@ const Footer = () => {
             <span className="relative block h-8 aspect-[1510/758] overflow-hidden opacity-80">
                 <Image
                     src="/jinx-on-white.png"
-                    alt="Jinx"
+                    alt="Jinx LTD"
                     width={2000}
                     height={2000}
                     sizes="90px"
@@ -28,7 +28,7 @@ const Footer = () => {
                 <Link href="/contact" className="transition-colors hover:text-gray-900">Contact</Link>
             </nav>
 
-            <p>© 2026 Jinx</p>
+            <p>© 2026 Jinx LTD</p>
         </footer>
     )
 }

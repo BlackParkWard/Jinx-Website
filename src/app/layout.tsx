@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { Inter, Titan_One, Bungee, Chango, Nunito } from "next/font/google";
-import { Header } from "@/components";
+import { Header, LoadingScreen } from "@/components";
 import { SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -51,6 +51,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
       className={`${inter.variable} ${bungee.variable} ${chango.variable} ${nunito.variable} h-full antialiased`}
     >
       <body className=" flex flex-col">
+        <LoadingScreen />
         <div className="w-full max-w-[1080px] min-h-full mx-auto flex flex-col">
           <Header />
           {children}

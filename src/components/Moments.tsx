@@ -24,7 +24,7 @@ const Moments = () => {
   return (
     <section
       ref={ref}
-      className={`moments mx-auto flex w-full max-w-4xl flex-col items-center gap-16 pb-32 transition-all duration-700 ease-out motion-reduce:transition-none md:flex-row md:justify-between ${
+      className={`moments mx-auto flex w-full max-w-4xl flex-col items-center gap-16 pb-32 transition-all duration-700 ease-out motion-reduce:transition-none lg:flex-row lg:justify-between ${
         seen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
       }`}
     >

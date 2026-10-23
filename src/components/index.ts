@@ -5,6 +5,7 @@ import FlowLine from "./FlowLine";
 import Footer from "./Footer";
 import Free from "./Free";
 import Header from "./Header";
+import LoadingScreen from "./LoadingScreen";
 import LogoOutline from "./LogoOutline";
 import Moments from "./Moments";
 import OneAtATime from "./OneAtATime";
@@ -13,6 +14,7 @@ import Tagline from "./Tagline";
 
 export {
   Header,
+  LoadingScreen,
   LogoOutline,
   Tagline,
   DailyDrop,

@@ -20,7 +20,8 @@ export default function Home() {
           the header floats over the hero, so leave room for it at the top.
           On phones it's empty until you scroll, so the hero starts higher
         */}
-        <section className="relative isolate -mx-6 mb-20 overflow-hidden pb-20 md:pt-[72px]">
+        {/* data-intro: its entrance waits for the loading screen to finish */}
+        <section data-intro className="relative isolate -mx-6 mb-20 overflow-hidden pb-20 md:pt-[72px]">
           {/* the flash photo is small, so a dark wash hides the softness */}
           <Image
             src="/picnic-date.webp"
