@@ -1,56 +1,75 @@
 "use client";
 
 import Image from "next/image";
+import type { CSSProperties } from "react";
 import useInView from "./useInView";
 
+// where each print lands in the fan, from the middle of the stack
+const PRINTS = [
+  { src: "/flash_photo2.jpg", caption: "the long way home", x: -150, y: 36, r: -8, focus: "50% 50%" },
+  { src: "/flash_photo1.jpg", caption: "tacos, then the late film", x: 0, y: 0, r: 2, focus: "50% 30%" },
+  { src: "/flash_photo3.jpg", caption: "karaoke. regrettably.", x: 150, y: 48, r: 7, focus: "70% 50%" },
+];
+
 /*
-  The panel waits, dim and colourless, until the scroll line reaches its
-  node (FlowLine sets data-lit on it). Then a camera flash pops, the photo
-  eases back into colour and the words rise in. Scrolling back up plays it
-  in reverse.
+  Three instant prints, waiting in a pile until the scroll line reaches the
+  heading (FlowLine sets data-lit on it). Then they're dealt out into a fan
+  and each one develops, from a pale blank into the photo, one after the
+  other. Scrolling back up gathers them in again. The motion lives in
+  globals.css under .moments-print.
 */
 const Moments = () => {
   const { ref, seen } = useInView<HTMLElement>();
 
   return (
-    <section ref={ref} className="mx-auto w-full max-w-4xl pb-28">
-      <div
-        className={`group/moments relative isolate flex h-[440px] items-end overflow-hidden rounded-[28px] bg-gray-900 p-6 transition-all duration-700 ease-out motion-reduce:transition-none md:h-[480px] md:p-12 ${
-          seen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
-        }`}
-      >
-        <Image
-          src="/flash_photo3.jpg"
-          alt=""
-          fill
-          sizes="(min-width: 896px) 896px, 100vw"
-          className="-z-10 scale-110 object-cover object-[70%_45%] brightness-75 grayscale transition-[scale,filter] duration-[2000ms] ease-[cubic-bezier(0.4,0,0.2,1)] motion-reduce:scale-100 motion-reduce:transition-[filter] group-has-[[data-lit]]/moments:scale-100 group-has-[[data-lit]]/moments:brightness-100 group-has-[[data-lit]]/moments:grayscale-0"
-        />
-        {/* a camera flash as the line arrives, before the colour comes in */}
-        <div className="pointer-events-none absolute inset-0 z-10 bg-white opacity-0 motion-reduce:hidden group-has-[[data-lit]]/moments:animate-[camera-flash_900ms_ease-out_both]" />
-        {/* the flash photo is small, so a wash hides the softness and carries the text */}
-        <div className="absolute inset-0 -z-10 bg-gradient-to-t from-black/85 via-black/35 to-black/10" />
-        <div className="absolute inset-0 -z-10 bg-gradient-to-r from-black/50 to-transparent" />
-
-        {/*
-          the flow node sits near the top of the photo rather than on the
-          text, so the line reaches it as the photo comes into view
-        */}
-        <span aria-hidden="true" data-flow-node className="absolute top-12 left-0" />
-
-        <p className="text-2xl leading-tight font-bold tracking-tight sm:text-3xl md:text-5xl"
-        >
-          <span
-            className="block translate-y-6 text-white opacity-0 transition-all delay-300 duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:transition-opacity group-has-[[data-lit]]/moments:translate-y-0 group-has-[[data-lit]]/moments:opacity-100"
-          >
-            Less time on your phone.
-          </span>
-          <span
-            className="block translate-y-6 text-white/60 opacity-0 transition-all delay-500 duration-700 ease-out motion-reduce:translate-y-0 motion-reduce:transition-opacity group-has-[[data-lit]]/moments:translate-y-0 group-has-[[data-lit]]/moments:opacity-100"
-          >
-            More nights like these.
-          </span>
+    <section
+      ref={ref}
+      className={`moments mx-auto flex w-full max-w-4xl flex-col items-center gap-16 pb-32 transition-all duration-700 ease-out motion-reduce:transition-none md:flex-row md:justify-between ${
+        seen ? "translate-y-0 opacity-100" : "translate-y-6 opacity-0"
+      }`}
+    >
+      <div className="max-w-sm">
+        <h2 data-flow-node className="mb-4 text-3xl font-bold">
+          Less time on your phone.
+          <span className="block text-gray-400">More nights like these.</span>
+        </h2>
+        <p className="text-lg text-gray-600">
+          The rounds build up to one question: what would a first date look
+          like? After that, it&apos;s over to you.
         </p>
+      </div>
+
+      <div className="relative h-[300px] w-full max-w-[420px] sm:h-[340px]">
+        {PRINTS.map((print, i) => (
+          <div
+            key={print.src}
+            className="moments-print absolute top-4 left-1/2 w-[150px] sm:w-[190px]"
+            style={
+              {
+                "--x": `${print.x}px`,
+                "--y": `${print.y}px`,
+                "--r": `${print.r}deg`,
+                "--i": i,
+              } as CSSProperties
+            }
+          >
+            <figure className="moments-card rounded-[3px] bg-white p-2 pb-0 shadow-[0_1px_2px_rgb(0_0_0/0.08),0_12px_32px_-12px_rgb(0_0_0/0.3)] sm:p-2.5 sm:pb-0">
+              <div className="relative aspect-square overflow-hidden bg-gray-900">
+                <Image
+                  src={print.src}
+                  alt=""
+                  fill
+                  sizes="190px"
+                  className="moments-photo object-cover"
+                  style={{ objectPosition: print.focus }}
+                />
+              </div>
+              <figcaption className="py-3 text-center font-[family-name:var(--font-nunito)] text-xs text-gray-500 sm:py-4 sm:text-sm">
+                {print.caption}
+              </figcaption>
+            </figure>
+          </div>
+        ))}
       </div>
     </section>
   );

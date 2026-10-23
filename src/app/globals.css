@@ -111,16 +111,64 @@ body {
   }
 }
 
-/* a quick white pop, like a camera flash going off (Moments) */
-@keyframes camera-flash {
-  0% {
-    opacity: 0;
+/*
+  Moments: instant prints dealt from a pile into a fan, each developing from
+  a pale blank into the photo once the scroll line lights the heading. The
+  figure does the dealing (staggered), the card inside lifts on hover, so
+  the stagger never delays the hover.
+*/
+.moments-print {
+  --spread: 0.5;
+  translate: -50% 0;
+  transform: rotate(calc(var(--r) * 0.3));
+  transition: transform 1000ms cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.moments-print:nth-child(2) {
+  z-index: 1;
+}
+
+.moments:has([data-lit]) .moments-print {
+  transform: translate(calc(var(--x) * var(--spread)), var(--y)) rotate(var(--r));
+  transition-delay: calc(var(--i) * 140ms);
+}
+
+@media (min-width: 40rem) {
+  .moments-print {
+    --spread: 1;
   }
-  12% {
-    opacity: 0.75;
+}
+
+.moments-photo {
+  filter: brightness(1.9) contrast(0.3) saturate(0) sepia(0.3) blur(2px);
+  transition: filter 500ms ease-in;
+}
+
+.moments:has([data-lit]) .moments-photo {
+  filter: brightness(1) contrast(1) saturate(1) sepia(0) blur(0);
+  transition: filter 2800ms cubic-bezier(0.4, 0, 0.2, 1) calc(600ms + var(--i) * 400ms);
+}
+
+.moments-card {
+  transition: transform 400ms cubic-bezier(0.16, 1, 0.3, 1), box-shadow 400ms ease-out;
+}
+
+@media (hover: hover) {
+  .moments:has([data-lit]) .moments-print:hover {
+    z-index: 2;
   }
-  100% {
-    opacity: 0;
+
+  .moments:has([data-lit]) .moments-print:hover .moments-card {
+    transform: translateY(-10px) rotate(calc(var(--r) * -1)) scale(1.04);
+    box-shadow: 0 2px 4px rgb(0 0 0 / 0.08), 0 24px 48px -16px rgb(0 0 0 / 0.35);
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .moments-print,
+  .moments-photo,
+  .moments-card {
+    transition: none !important;
   }
 }
 
