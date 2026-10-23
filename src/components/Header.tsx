@@ -151,7 +151,17 @@ const Header = () => {
             </div>
 
             <div>
-                <a href="/" aria-label="Jinx home" className="block">
+                {/*
+                  on phones the hero's big logo is right below, so the header's
+                  logo waits for the pill
+                */}
+                <a
+                    href="/"
+                    aria-label="Jinx home"
+                    className={`block transition-opacity duration-500 ${
+                        light ? "max-md:pointer-events-none max-md:opacity-0" : ""
+                    }`}
+                >
                     {/* the source PNG is a padded square, so crop to the wordmark */}
                     <span
                         className={`relative block h-9 aspect-[1510/758] origin-left overflow-hidden transition-[scale] duration-700 motion-reduce:transition-none ${

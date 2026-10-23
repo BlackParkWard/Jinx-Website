@@ -16,8 +16,11 @@ import Image from "next/image";
 export default function Home() {
   return (
     <div className="flex font-sans bg-white h-full px-6 flex flex-col">
-        {/* the header floats over the hero, so leave room for it at the top */}
-        <section className="relative isolate -mx-6 mb-20 overflow-hidden pt-[72px] pb-20">
+        {/*
+          the header floats over the hero, so leave room for it at the top.
+          On phones it's empty until you scroll, so the hero starts higher
+        */}
+        <section className="relative isolate -mx-6 mb-20 overflow-hidden pb-20 md:pt-[72px]">
           {/* the flash photo is small, so a dark wash hides the softness */}
           <Image
             src="/picnic-date.webp"

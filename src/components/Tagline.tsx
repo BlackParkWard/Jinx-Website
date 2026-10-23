@@ -10,7 +10,7 @@ const Tagline = () => {
             <h1 className="text-5xl leading-[1.05] font-black tracking-tight text-white sm:text-6xl lg:text-7xl">
 
                 <span
-                    className="block text-4xl text-white font-bold  animate-[fade-up_0.7s_ease-out_160ms_both] motion-reduce:animate-none"
+                    className="block text-3xl text-white font-bold sm:text-4xl  animate-[fade-up_0.7s_ease-out_160ms_both] motion-reduce:animate-none"
                     // style={{ color: BRAND }}
                 >
                     Some things just <span className="text-white">click.</span>
