@@ -1,3 +1,4 @@
+import ComingSoon, { ComingSoonButton, openComingSoon } from "./ComingSoon";
 import Conversation from "./Conversation";
 import DailyDrop from "./DailyDrop";
 import Faq from "./Faq";
@@ -13,6 +14,9 @@ import Safety from "./Safety";
 import Tagline from "./Tagline";
 
 export {
+  ComingSoon,
+  ComingSoonButton,
+  openComingSoon,
   Header,
   LoadingScreen,
   LogoOutline,

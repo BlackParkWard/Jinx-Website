@@ -1,12 +1,14 @@
 // Mirrors docs/legal/community-guidelines.md in BlackParkWard/Spark. A change to one must be made to the other.
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/seo";
 import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
 
-export const metadata: Metadata = {
-    title: "Community guidelines | Jinx",
-    description: "How we expect people to treat each other on Jinx, and what happens when they don't.",
-};
+export const metadata: Metadata = pageMetadata(
+    "/community-guidelines",
+    "Community guidelines",
+    "How we expect people to treat each other on Jinx, and what happens when they don't.",
+);
 
 export default function CommunityGuidelines() {
     return (

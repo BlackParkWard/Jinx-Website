@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/seo";
 import { CONTACT_EMAIL } from "@/lib/site";
 
-export const metadata: Metadata = {
-    title: "Contact | Jinx",
-    description: "Get in touch with the Jinx team.",
-};
+export const metadata: Metadata = pageMetadata(
+    "/contact",
+    "Contact",
+    "Questions, feedback or a problem with Jinx? Email the team and a person will reply. Report someone or ask about your data.",
+);
 
 const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "rgb(19, 19, 19)";
 

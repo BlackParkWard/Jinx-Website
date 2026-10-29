@@ -1,11 +1,13 @@
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/seo";
 import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
 
-export const metadata: Metadata = {
-    title: "Terms | Jinx",
-    description: "The terms for using Jinx.",
-};
+export const metadata: Metadata = pageMetadata(
+    "/terms",
+    "Terms",
+    "The terms for using Jinx, the free dating app with one match a day.",
+);
 
 export default function Terms() {
     return (
