@@ -1,3 +1,4 @@
+import { Analytics } from "@vercel/analytics/next";
 import type { Metadata, Viewport } from "next";
 import { Inter, Titan_One, Bungee, Chango, Nunito } from "next/font/google";
 import { ComingSoon, Header, LoadingScreen } from "@/components";
@@ -96,6 +97,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           {children}
         </div>
         <ComingSoon />
+        <Analytics />
       </body>
     </html>
   );
