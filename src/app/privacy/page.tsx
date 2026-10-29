@@ -1,12 +1,14 @@
 // Mirrors docs/legal/privacy-policy.md in BlackParkWard/Spark. A change to one must be made to the other.
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
+import { pageMetadata } from "@/lib/seo";
 import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
 
-export const metadata: Metadata = {
-    title: "Privacy | Jinx",
-    description: "What Jinx collects, why, who it's shared with, and how to delete it.",
-};
+export const metadata: Metadata = pageMetadata(
+    "/privacy",
+    "Privacy",
+    "What Jinx collects, why, who it's shared with, and how to delete it.",
+);
 
 export default function Privacy() {
     return (

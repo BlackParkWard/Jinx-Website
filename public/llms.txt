@@ -1,0 +1,17 @@
+# Jinx
+
+> Jinx is a free dating app with one match a day. You and your match each choose Connect or Decline without seeing the other's choice. If you both connect, you get to know each other in rounds of questions, with answers revealed together, before choosing to open free chat. Jinx launches in Manchester in December 2026, on iPhone first.
+
+- No subscription, no paid boosts and no premium tier. Everyone gets the same one match a day.
+- Decisions are private: nobody sees a no.
+- Phone numbers, emails and handles are blocked until both people open chat.
+- Photos are reviewed and every answer and message is moderated.
+- The AI that suggests questions sees only interests and profile answers, never names, photos or location.
+
+## Pages
+
+- [Home](https://joinjinx.com/): how Jinx works, safety and FAQ
+- [Community guidelines](https://joinjinx.com/community-guidelines): how people are expected to treat each other
+- [Privacy](https://joinjinx.com/privacy): what Jinx collects and how to delete it
+- [Terms](https://joinjinx.com/terms): the terms for using Jinx
+- [Contact](https://joinjinx.com/contact): support@joinjinx.com

@@ -12,10 +12,74 @@ import {
   LogoOutline
 } from "@/components";
 import Image from "next/image";
+import { QUESTIONS } from "@/lib/faq";
+import { CONTACT_EMAIL, SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
+
+// what search engines and AI answers read about Jinx: the company, the site,
+// the app and the FAQ, linked by id so they read as one thing
+const jsonLd = {
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Organization",
+      "@id": `${SITE_URL}/#organization`,
+      name: SITE_NAME,
+      legalName: "Jinx LTD",
+      url: SITE_URL,
+      logo: `${SITE_URL}/icon.png`,
+      email: CONTACT_EMAIL,
+      contactPoint: {
+        "@type": "ContactPoint",
+        contactType: "customer support",
+        email: CONTACT_EMAIL,
+        availableLanguage: "English",
+      },
+    },
+    {
+      "@type": "WebSite",
+      "@id": `${SITE_URL}/#website`,
+      url: SITE_URL,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      inLanguage: "en-GB",
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "MobileApplication",
+      "@id": `${SITE_URL}/#app`,
+      name: SITE_NAME,
+      description: SITE_DESCRIPTION,
+      url: SITE_URL,
+      image: `${SITE_URL}/opengraph-image.png`,
+      operatingSystem: "iOS",
+      applicationCategory: "LifestyleApplication",
+      applicationSubCategory: "Dating",
+      areaServed: { "@type": "City", name: "Manchester" },
+      offers: { "@type": "Offer", price: "0", priceCurrency: "GBP" },
+      publisher: { "@id": `${SITE_URL}/#organization` },
+    },
+    {
+      "@type": "FAQPage",
+      "@id": `${SITE_URL}/#faq`,
+      mainEntity: QUESTIONS.map(({ q, a }) => ({
+        "@type": "Question",
+        name: q,
+        acceptedAnswer: { "@type": "Answer", text: a },
+      })),
+    },
+  ],
+};
 
 export default function Home() {
   return (
     <div className="flex font-sans bg-white h-full px-6 flex flex-col">
+        <script
+          type="application/ld+json"
+          // biome-ignore lint/security/noDangerouslySetInnerHtml: static JSON, with < escaped as Next's docs advise
+          dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd).replace(/</g, "\\u003c") }}
+        />
+        {/* contents, so the landmark doesn't change the layout */}
+        <main className="contents">
         {/*
           the header floats over the hero, so leave room for it at the top.
           On phones it's empty until you scroll, so the hero starts higher
@@ -56,6 +120,7 @@ export default function Home() {
           <Safety />
           <Faq />
         </FlowLine>
+        </main>
         <Footer />
     </div>
   );
