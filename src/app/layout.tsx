@@ -1,6 +1,6 @@
 import type { Metadata, Viewport } from "next";
 import { Inter, Titan_One, Bungee, Chango, Nunito } from "next/font/google";
-import { Header, LoadingScreen } from "@/components";
+import { ComingSoon, Header, LoadingScreen } from "@/components";
 import { SITE_DESCRIPTION, SITE_NAME, SITE_URL } from "@/lib/site";
 import "./globals.css";
 
@@ -95,7 +95,7 @@ export default function RootLayout({ children }: LayoutProps<"/">) {
           <Header />
           {children}
         </div>
-
+        <ComingSoon />
       </body>
     </html>
   );

@@ -9,7 +9,8 @@ import {
   Faq,
   Footer,
   FlowLine,
-  LogoOutline
+  LogoOutline,
+  ComingSoonButton,
 } from "@/components";
 import Image from "next/image";
 import { QUESTIONS } from "@/lib/faq";
@@ -98,16 +99,16 @@ export default function Home() {
           <div className="absolute inset-0 -z-10 bg-gradient-to-b from-black/70 via-black/55 to-black/75" />
           <Tagline />
           <div className="flex  gap-2 justify-center h-max items-center animate-[fade-up_0.7s_ease-out_320ms_both] motion-reduce:animate-none">
-            <button 
+            <ComingSoonButton
               style={{ backgroundColor: process.env.NEXT_PUBLIC_BRAND_COLOR }}
               className="text-white px-5 pl-4 py-2 rounded-full text-lg hover:brightness-95 hover:-translate-y-0.5 hover:shadow-lg active:translate-y-0 active:scale-[0.98] transition duration-200 flex gap-2 items-center justify-center"
             >
               <Image src="/apple.svg" alt="App Store" width={24} height={24} />
               Get the app
-            </button>
-            <button className=" px-5 py-2 rounded-full  text-lg bg-gray-200 text-gray-800 hover:bg-gray-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition duration-200">
+            </ComingSoonButton>
+            <ComingSoonButton className=" px-5 py-2 rounded-full  text-lg bg-gray-200 text-gray-800 hover:bg-gray-300 hover:-translate-y-0.5 active:translate-y-0 active:scale-[0.98] transition duration-200">
               Create account
-            </button>
+            </ComingSoonButton>
           </div>
         </section>
 

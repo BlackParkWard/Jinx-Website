@@ -3,6 +3,7 @@
 import Image from "next/image";
 import { usePathname } from "next/navigation";
 import { useEffect, useRef, useState } from "react";
+import { openComingSoon } from "./ComingSoon";
 
 const BRAND = process.env.NEXT_PUBLIC_BRAND_COLOR ?? "rgb(19, 19, 19)";
 
@@ -224,6 +225,7 @@ const Header = () => {
                     <div className="min-w-0 overflow-hidden">
                         <button
                             type="button"
+                            onClick={openComingSoon}
                             tabIndex={pastHero ? 0 : -1}
                             aria-hidden={!pastHero}
                             className="flex items-center gap-1.5 whitespace-nowrap rounded-full py-1.5 pr-4 pl-3 text-sm font-medium text-white transition hover:brightness-95 active:scale-[0.98]"
