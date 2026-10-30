@@ -1,8 +1,8 @@
-// Mirrors docs/legal/privacy-policy.md in BlackParkWard/Spark. A change to one must be made to the other.
+// Mirrors docs/legal/privacy-policy.md in BlackParkWard/Jinx. A change to one must be made to the other.
 import type { Metadata } from "next";
 import LegalPage from "@/components/LegalPage";
 import { pageMetadata } from "@/lib/seo";
-import { CONTACT_EMAIL, LAST_UPDATED } from "@/lib/site";
+import { CONTACT_EMAIL, PRIVACY_LAST_UPDATED } from "@/lib/site";
 
 export const metadata: Metadata = pageMetadata(
     "/privacy",
@@ -14,7 +14,7 @@ export default function Privacy() {
     return (
         <LegalPage
             title="Privacy"
-            updated={LAST_UPDATED}
+            updated={PRIVACY_LAST_UPDATED}
             intro={
                 <p>
                     Jinx shows you one person a day, so it needs to know a little about you. This
@@ -51,7 +51,10 @@ export default function Privacy() {
             <p>
                 <strong>What happens in the app.</strong> Your daily matches and your Connect or
                 Decline choices, the questions you choose, your answers and reactions, chat messages
-                once chat is open, and any reports or blocks you make.
+                once chat is open, and any reports or blocks you make. We also keep a history of
+                how your matches turned out for you (a match that wasn't mutual, a connection that
+                ended, or a day with no match), with when it happened and when you saw and closed the
+                notice about it. It doesn't say who the other person was or why.
             </p>
             <p>
                 <strong>Your device.</strong> A push notification token, so we can tell you when your
@@ -67,7 +70,11 @@ export default function Privacy() {
                 <li>To check photos, answers and messages before anyone else sees them.</li>
                 <li>To handle reports, enforce our <a href="/terms">terms</a> and keep Jinx safe.</li>
                 <li>To send the notifications you've allowed.</li>
-                <li>To understand how the app is used and fix what breaks.</li>
+                <li>To show you, once, what happened since you last opened the app.</li>
+                <li>
+                    To understand how the app is used and fix what breaks, including using your match
+                    history for tips in the app and to understand how active accounts are.
+                </li>
             </ul>
             <p>
                 Under UK data protection law, we rely on providing the service you signed up for,
@@ -122,7 +129,7 @@ export default function Privacy() {
             <h2>How long we keep it</h2>
             <p>
                 We keep your data while your account is open. When you delete your account, we
-                remove your profile, photos, matches, answers and messages. A few things stay, and
+                remove your profile, photos, matches, match history, answers and messages. A few things stay, and
                 this is why:
             </p>
             <ul>
