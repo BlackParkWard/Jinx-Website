@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { LAST_UPDATED_ISO, SITE_URL } from "@/lib/site";
+import { LAST_UPDATED_ISO, PRIVACY_LAST_UPDATED_ISO, SITE_URL } from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -13,7 +13,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     },
     {
       url: `${SITE_URL}/privacy`,
-      lastModified: LAST_UPDATED_ISO,
+      lastModified: PRIVACY_LAST_UPDATED_ISO,
       changeFrequency: "yearly",
       priority: 0.3,
     },
