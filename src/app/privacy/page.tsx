@@ -44,6 +44,13 @@ export default function Privacy() {
                 your answers to three profile prompts, and your interests.
             </p>
             <p>
+                Before a match, your first photo may also be shown, blurred, to people you might be
+                matched with in the next two days: up to about 12 people at a time, all of whom fit
+                your preferences (and you theirs), never someone you've blocked or who has blocked
+                you. It shows nothing else about you, not even your name, and you can't opt out of
+                it.
+            </p>
+            <p>
                 <strong>Your location.</strong> A coarse location, your city and your time zone, used
                 to find matches within your chosen distance and to deliver your daily match at the
                 time you picked.
@@ -66,6 +73,11 @@ export default function Privacy() {
             <ul>
                 <li>To create your profile and show it to the person you're matched with each day.</li>
                 <li>To pick your match using your preferences, distance and shared interests.</li>
+                <li>
+                    To suggest your match ahead of time: we may suggest a pairing up to two days before
+                    a drop, from your profile and preferences at that time. We check it again at the
+                    drop, so a pairing that no longer fits isn't used, and delete it then.
+                </li>
                 <li>To suggest questions for you and your match.</li>
                 <li>To check photos, answers and messages before anyone else sees them.</li>
                 <li>To handle reports, enforce our <a href="/terms">terms</a> and keep Jinx safe.</li>
@@ -133,6 +145,10 @@ export default function Privacy() {
                 this is why:
             </p>
             <ul>
+                <li>
+                    Suggested pairings are deleted at the drop, or with your account, and within 7
+                    days if a drop fails.
+                </li>
                 <li>
                     Reports you made are kept with your name removed, so we can finish handling them.
                     Reports about you lose your details.
