@@ -130,7 +130,7 @@ export default function Privacy() {
             </p>
 
             <h2>Who helps us run Jinx</h2>
-            <p>We share data only with the services that run the app for us:</p>
+            <p>We share data only with the services that run Jinx for us:</p>
             <ul>
                 <li><strong>Supabase</strong>: our database, file storage and server functions.</li>
                 <li><strong>Anthropic</strong>: question suggestions and content checks, as above.</li>
@@ -139,11 +139,29 @@ export default function Privacy() {
                     if you've chosen to share analytics with app developers in iOS Settings. Apple gives
                     them to us without your name or account.
                 </li>
+                <li><strong>Vercel</strong>: hosts this website and counts visits to it, as described in "This website".</li>
             </ul>
             <p>
                 Some of these providers process data outside the UK. When they do, it's protected by
                 approved safeguards such as standard contractual clauses. We may also share
                 information if the law requires it, or to protect someone's safety.
+            </p>
+
+            <h2>This website</h2>
+            <p>
+                joinjinx.com is hosted by <strong>Vercel</strong>, which also counts visits to it with
+                Vercel Web Analytics. For each page view it records the page and when you viewed it,
+                the site that sent you here, your approximate location (country, region and city), and
+                your browser, operating system and device type. It uses no cookies. It tells visits
+                apart with a scrambled code made from your request, which it discards after 24 hours,
+                and it doesn't tie page views to your IP address. We only see totals, never who
+                visited, and none of it is linked to a Jinx account. Like any web host, Vercel also
+                receives your IP address and browser details when it serves a page, and keeps them
+                briefly in its logs to run and protect the site. The app doesn't use it.
+            </p>
+            <p>
+                Under UK data protection law, we rely on our legitimate interest in understanding how
+                the site is used to count visits this way, without cookies.
             </p>
 
             <h2>How long we keep it</h2>
