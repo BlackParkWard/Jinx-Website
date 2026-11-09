@@ -1,5 +1,10 @@
 import type { MetadataRoute } from "next";
-import { LAST_UPDATED_ISO, PRIVACY_LAST_UPDATED_ISO, SITE_URL } from "@/lib/site";
+import {
+  GUIDELINES_LAST_UPDATED_ISO,
+  LAST_UPDATED_ISO,
+  PRIVACY_LAST_UPDATED_ISO,
+  SITE_URL,
+} from "@/lib/site";
 
 export default function sitemap(): MetadataRoute.Sitemap {
   return [
@@ -7,7 +12,7 @@ export default function sitemap(): MetadataRoute.Sitemap {
     { url: `${SITE_URL}/contact`, changeFrequency: "yearly", priority: 0.5 },
     {
       url: `${SITE_URL}/community-guidelines`,
-      lastModified: LAST_UPDATED_ISO,
+      lastModified: GUIDELINES_LAST_UPDATED_ISO,
       changeFrequency: "yearly",
       priority: 0.4,
     },
