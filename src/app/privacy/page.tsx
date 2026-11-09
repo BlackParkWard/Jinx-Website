@@ -146,6 +146,17 @@ export default function Privacy() {
                 information if the law requires it, or to protect someone's safety.
             </p>
 
+            <h2>This website</h2>
+            <p>
+                joinjinx.com is hosted by <strong>Vercel</strong>, which also counts visits to it with
+                Vercel Web Analytics. For each page view it records the page and when you viewed it,
+                the site that sent you here, your approximate location (country, region and city), and
+                your browser, operating system and device type. It uses no cookies. It tells visits
+                apart with a scrambled code made from your request, which it discards after 24 hours,
+                and it doesn't tie page views to your IP address. We only see totals, never who
+                visited, and none of it is linked to a Jinx account. The app doesn't use it.
+            </p>
+
             <h2>How long we keep it</h2>
             <p>
                 We keep your data while your account is open. When you delete your account, we
