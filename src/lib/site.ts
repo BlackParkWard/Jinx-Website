@@ -15,8 +15,8 @@ export const LAST_UPDATED = "16 October 2026";
 export const LAST_UPDATED_ISO = "2026-10-16";
 
 // the privacy page changes on its own (it mirrors docs/legal/privacy-policy.md in BlackParkWard/Jinx)
-export const PRIVACY_LAST_UPDATED = "9 November 2026";
-export const PRIVACY_LAST_UPDATED_ISO = "2026-11-09";
+export const PRIVACY_LAST_UPDATED = "11 November 2026";
+export const PRIVACY_LAST_UPDATED_ISO = "2026-11-11";
 
 // the community guidelines page changes on its own too (it mirrors docs/legal/community-guidelines.md in BlackParkWard/Jinx)
 export const GUIDELINES_LAST_UPDATED = "9 November 2026";

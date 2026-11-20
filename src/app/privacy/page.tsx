@@ -85,6 +85,10 @@ export default function Privacy() {
                 <li>To send the notifications you've allowed.</li>
                 <li>To show you, once, what happened since you last opened the app.</li>
                 <li>
+                    To send you one reminder if you miss a couple of matches in a row, using your match
+                    history.
+                </li>
+                <li>
                     To fix and improve the app, using crash reports and your match history (for
                     example, tips in the app, and understanding how active accounts are). This stays
                     with us: the app doesn't use an analytics service.
